@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f6d7c6">
+  <title>Feliz cumpleaños</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎂%3C/text%3E%3C/svg%3E">
+  <style>
+    @font-face {
+      font-family: "Fraunces";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("assets/fonts/fraunces-latin.woff2") format("woff2");
+    }
+
+    @font-face {
+      font-family: "Outfit";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("assets/fonts/outfit-latin.woff2") format("woff2");
+    }
+
+    :root {
+      color-scheme: light;
+      --ink: #3a2924;
+      --berry: #9d3048;
+      --cocoa: #6a3e32;
+      --paper: #fffaf6;
+      --cream: #fff3e8;
+      --line: #e0b08a;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100dvh;
+      color: var(--ink);
+      font-family: Outfit, "Segoe UI", sans-serif;
+      background: #f6d7c6;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    .pattern,
+    .wash {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .pattern {
+      background-image: url("assets/fondo.jpg");
+      background-size: 540px auto;
+      opacity: 0.28;
+    }
+
+    .wash {
+      background:
+        radial-gradient(900px 520px at 8% -10%, rgba(255, 255, 255, 0.78), transparent 60%),
+        radial-gradient(640px 480px at 100% 110%, rgba(224, 122, 141, 0.28), transparent 55%),
+        linear-gradient(180deg, rgba(255, 236, 226, 0.55), rgba(246, 215, 198, 0.15));
+    }
+
+    .confetti {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .confetti i {
+      position: absolute;
+      top: -16px;
+      display: block;
+      opacity: 0.9;
+      animation: caer linear infinite;
+    }
+
+    .confetti i:nth-child(3n) { width: 8px; height: 8px; border-radius: 50%; }
+    .confetti i:nth-child(3n + 1) { width: 7px; height: 13px; border-radius: 2px; }
+    .confetti i:nth-child(3n + 2) { width: 11px; height: 6px; border-radius: 2px; }
+
+    .confetti i:nth-child(1) { left: 6%; background: #e07a8d; animation-duration: 7.5s; animation-delay: -1s; }
+    .confetti i:nth-child(2) { left: 14%; background: #f2c14e; animation-duration: 9s; animation-delay: -4s; }
+    .confetti i:nth-child(3) { left: 22%; background: #fffaf6; animation-duration: 8s; animation-delay: -2s; }
+    .confetti i:nth-child(4) { left: 31%; background: #7eaa8a; animation-duration: 10s; animation-delay: -6s; }
+    .confetti i:nth-child(5) { left: 40%; background: #e07a8d; animation-duration: 6.8s; animation-delay: -3s; }
+    .confetti i:nth-child(6) { left: 48%; background: #f2c14e; animation-duration: 8.6s; animation-delay: -7s; }
+    .confetti i:nth-child(7) { left: 57%; background: #c47a55; animation-duration: 9.4s; animation-delay: -1.5s; }
+    .confetti i:nth-child(8) { left: 66%; background: #fffaf6; animation-duration: 7.2s; animation-delay: -5s; }
+    .confetti i:nth-child(9) { left: 74%; background: #e07a8d; animation-duration: 11s; animation-delay: -2.4s; }
+    .confetti i:nth-child(10) { left: 82%; background: #f2c14e; animation-duration: 8.2s; animation-delay: -6.5s; }
+    .confetti i:nth-child(11) { left: 90%; background: #7eaa8a; animation-duration: 9.8s; animation-delay: -3.6s; }
+    .confetti i:nth-child(12) { left: 96%; background: #c47a55; animation-duration: 7.8s; animation-delay: -8s; }
+
+    .globo {
+      position: fixed;
+      z-index: 1;
+      width: 58px;
+      height: 72px;
+      border-radius: 50% 50% 48% 52% / 58% 58% 42% 42%;
+      box-shadow: inset -8px -10px 0 rgba(255, 255, 255, 0.28);
+      animation: flotar 5.5s ease-in-out infinite;
+    }
+
+    .globo::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 98%;
+      width: 1.5px;
+      height: 78px;
+      background: rgba(90, 52, 42, 0.35);
+    }
+
+    .g1 { top: 7%; left: max(18px, calc(50% - 360px)); background: #e07a8d; }
+    .g2 { top: 16%; right: max(18px, calc(50% - 370px)); background: #f2c14e; animation-delay: -2s; }
+
+    main {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      min-width: 0;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: max(20px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+    }
+
+    .tarjeta {
+      width: min(440px, calc(100vw - 32px));
+      min-width: 0;
+      max-width: calc(100vw - 32px);
+      background: var(--paper);
+      border-radius: 30px;
+      padding: 0 22px 26px;
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.8) inset,
+        0 22px 50px rgba(92, 42, 36, 0.16);
+      animation: subir 0.7s ease both;
+    }
+
+    .cinta {
+      height: 12px;
+      margin: 0 -22px 8px;
+      border-radius: 30px 30px 0 0;
+      background: repeating-linear-gradient(
+        90deg,
+        #b8435a 0 16px,
+        #f2c14e 16px 26px,
+        #fffaf6 26px 34px
+      );
+    }
+
+    .ilustracion {
+      display: block;
+      width: 100%;
+      max-width: 340px;
+      height: auto;
+      margin: 0 auto;
+      mix-blend-mode: multiply;
+    }
+
+    .mensaje {
+      margin: 4px 0 0;
+      font-family: Fraunces, Palatino, Georgia, serif;
+      font-weight: 560;
+      font-optical-sizing: auto;
+      font-size: clamp(1.18rem, 4.6vw, 1.38rem);
+      line-height: 1.5;
+      letter-spacing: -0.015em;
+      text-align: center;
+      text-wrap: wrap;
+      white-space: normal;
+      overflow-wrap: break-word;
+      max-width: 100%;
+    }
+
+    .deseo {
+      margin: 18px 0 0;
+      font-family: Fraunces, Palatino, Georgia, serif;
+      font-weight: 650;
+      font-optical-sizing: auto;
+      font-size: clamp(1.28rem, 4.8vw, 1.55rem);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      text-align: center;
+      text-wrap: wrap;
+      white-space: normal;
+      max-width: 100%;
+      color: var(--berry);
+    }
+
+    .cierre {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      min-width: 0;
+    }
+
+    .pollito {
+      width: 112px;
+      height: auto;
+      flex: none;
+      margin-bottom: -8px;
+      mix-blend-mode: multiply;
+      animation: saludo 3.2s ease-in-out infinite;
+    }
+
+    .regalo {
+      flex: 1;
+      min-width: 0;
+      margin: 0;
+      padding: 14px 14px 15px;
+      background: var(--cream);
+      border: 1.5px dashed var(--line);
+      border-radius: 18px;
+      color: var(--cocoa);
+      font-weight: 560;
+      font-size: 1.02rem;
+      line-height: 1.4;
+      text-align: center;
+      text-wrap: pretty;
+    }
+
+    @keyframes subir {
+      from { opacity: 0; transform: translateY(16px) scale(0.985); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes caer {
+      to { transform: translateY(110dvh) rotate(280deg); }
+    }
+
+    @keyframes saludo {
+      50% { transform: translateY(-7px) rotate(-3deg); }
+    }
+
+    @keyframes flotar {
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 520px) {
+      .tarjeta { padding: 0 16px 22px; }
+      .cinta { margin: 0 -16px 4px; }
+      .cierre { flex-direction: column; align-items: center; }
+      .pollito { width: 120px; margin-bottom: 0; }
+      .regalo { width: 100%; }
+    }
+
+    @media (max-width: 759px) {
+      .globo { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .confetti { display: none; }
+      .tarjeta, .pollito, .globo { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="pattern" aria-hidden="true"></div>
+  <div class="wash" aria-hidden="true"></div>
+  <div class="globo g1" aria-hidden="true"></div>
+  <div class="globo g2" aria-hidden="true"></div>
+  <div class="confetti" aria-hidden="true">
+    <i></i><i></i><i></i><i></i><i></i><i></i>
+    <i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+
+  <main>
+    <article class="tarjeta">
+      <div class="cinta" aria-hidden="true"></div>
+      <img class="ilustracion" src="assets/pastel.jpg" alt="Pastel con velas y las palabras feliz cumpleaños">
+      <p class="mensaje">Los postres no tardan 6 a 10 días hábiles en llegar, así que alcanzaron a llegar a tiempo para desearte un feliz cumpleaños.</p>
+      <p class="deseo">¡Que tengas un excelente día!</p>
+      <div class="cierre">
+        <img class="pollito" src="assets/pollito.jpg" alt="Pollito con gorro de fiesta">
+        <p class="regalo">El regalo principal llega en unos días.</p>
+      </div>
+    </article>
+  </main>
+</body>
+</html>
