@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>QR para imprimir</title>
+  <style>
+    @font-face {
+      font-family: "Outfit";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("assets/fonts/outfit-latin.woff2") format("woff2");
+    }
+
+    @page {
+      size: A4;
+      margin: 16mm;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      background: #e7e2dc;
+      color: #2c211e;
+      font-family: Outfit, "Segoe UI", sans-serif;
+    }
+
+    .nota {
+      margin: 0;
+      font-size: 0.98rem;
+    }
+
+    .imprimir {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 18px;
+      background: #9d3048;
+      color: #fff;
+      font: inherit;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    .recorte {
+      width: 92mm;
+      padding: 9mm 9mm 8mm;
+      background: #fff;
+      border: 1.25pt dashed #222;
+      text-align: center;
+    }
+
+    .recorte img {
+      display: block;
+      width: 68mm;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .recorte p {
+      margin: 6mm 0 0;
+      font-size: 18pt;
+      font-weight: 650;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .recorte .para {
+      margin-top: 3mm;
+      font-size: 15pt;
+      font-weight: 560;
+      letter-spacing: 0.06em;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .nota, .imprimir { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <p class="nota">Imprime esta hoja y recorta por la línea punteada.</p>
+  <button class="imprimir" type="button" onclick="print()">Imprimir</button>
+  <article class="recorte">
+    <img src="qr.svg" alt="Código QR de la tarjeta de cumpleaños">
+    <p>Escáneame</p>
+    <p class="para">Cumpleañera</p>
+  </article>
+</body>
+</html>
