@@ -61,6 +61,7 @@
       background-image: url("assets/fondo.jpg");
       background-size: 540px auto;
       opacity: 0.28;
+      animation: deriva 48s linear infinite;
     }
 
     .wash {
@@ -75,56 +76,23 @@
       inset: 0;
       overflow: hidden;
       pointer-events: none;
-      z-index: 2;
+      z-index: 4;
     }
 
     .confetti i {
       position: absolute;
-      top: -16px;
+      top: -18px;
       display: block;
-      opacity: 0.9;
+      opacity: 0.92;
       animation: caer linear infinite;
     }
 
-    .confetti i:nth-child(3n) { width: 8px; height: 8px; border-radius: 50%; }
-    .confetti i:nth-child(3n + 1) { width: 7px; height: 13px; border-radius: 2px; }
-    .confetti i:nth-child(3n + 2) { width: 11px; height: 6px; border-radius: 2px; }
-
-    .confetti i:nth-child(1) { left: 6%; background: #e07a8d; animation-duration: 7.5s; animation-delay: -1s; }
-    .confetti i:nth-child(2) { left: 14%; background: #f2c14e; animation-duration: 9s; animation-delay: -4s; }
-    .confetti i:nth-child(3) { left: 22%; background: #fffaf6; animation-duration: 8s; animation-delay: -2s; }
-    .confetti i:nth-child(4) { left: 31%; background: #7eaa8a; animation-duration: 10s; animation-delay: -6s; }
-    .confetti i:nth-child(5) { left: 40%; background: #e07a8d; animation-duration: 6.8s; animation-delay: -3s; }
-    .confetti i:nth-child(6) { left: 48%; background: #f2c14e; animation-duration: 8.6s; animation-delay: -7s; }
-    .confetti i:nth-child(7) { left: 57%; background: #c47a55; animation-duration: 9.4s; animation-delay: -1.5s; }
-    .confetti i:nth-child(8) { left: 66%; background: #fffaf6; animation-duration: 7.2s; animation-delay: -5s; }
-    .confetti i:nth-child(9) { left: 74%; background: #e07a8d; animation-duration: 11s; animation-delay: -2.4s; }
-    .confetti i:nth-child(10) { left: 82%; background: #f2c14e; animation-duration: 8.2s; animation-delay: -6.5s; }
-    .confetti i:nth-child(11) { left: 90%; background: #7eaa8a; animation-duration: 9.8s; animation-delay: -3.6s; }
-    .confetti i:nth-child(12) { left: 96%; background: #c47a55; animation-duration: 7.8s; animation-delay: -8s; }
-
-    .globo {
-      position: fixed;
-      z-index: 1;
-      width: 58px;
-      height: 72px;
-      border-radius: 50% 50% 48% 52% / 58% 58% 42% 42%;
-      box-shadow: inset -8px -10px 0 rgba(255, 255, 255, 0.28);
-      animation: flotar 5.5s ease-in-out infinite;
-    }
-
-    .globo::after {
-      content: "";
-      position: absolute;
+    .confetti i.estallido {
+      top: 34%;
       left: 50%;
-      top: 98%;
-      width: 1.5px;
-      height: 78px;
-      background: rgba(90, 52, 42, 0.35);
+      opacity: 1;
+      animation: estallar 1.35s ease-out forwards;
     }
-
-    .g1 { top: 7%; left: max(18px, calc(50% - 360px)); background: #e07a8d; }
-    .g2 { top: 16%; right: max(18px, calc(50% - 370px)); background: #f2c14e; animation-delay: -2s; }
 
     main {
       position: relative;
@@ -135,10 +103,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: max(20px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+      padding: max(28px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
     }
 
     .tarjeta {
+      position: relative;
       width: min(440px, calc(100vw - 32px));
       min-width: 0;
       max-width: calc(100vw - 32px);
@@ -148,8 +117,31 @@
       box-shadow:
         0 1px 0 rgba(255, 255, 255, 0.8) inset,
         0 22px 50px rgba(92, 42, 36, 0.16);
-      animation: subir 0.7s ease both;
+      animation: subir 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
     }
+
+    .globo {
+      position: absolute;
+      z-index: 5;
+      pointer-events: none;
+      border-radius: 50% 50% 48% 52% / 58% 58% 42% 42%;
+      box-shadow: inset -7px -8px 0 rgba(255, 255, 255, 0.28);
+      animation: flotar 4.8s ease-in-out infinite;
+    }
+
+    .globo::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 96%;
+      width: 1.5px;
+      height: 42px;
+      background: rgba(90, 52, 42, 0.35);
+    }
+
+    .g1 { width: 48px; height: 60px; top: -22px; left: 18px; background: #e07a8d; }
+    .g2 { width: 36px; height: 46px; top: -30px; right: 54px; background: #f2c14e; animation-delay: -1.6s; }
+    .g3 { width: 30px; height: 38px; top: 8px; right: -8px; background: #7eaa8a; animation-delay: -2.8s; }
 
     .cinta {
       height: 12px;
@@ -161,7 +153,29 @@
         #f2c14e 16px 26px,
         #fffaf6 26px 34px
       );
+      background-size: 68px 100%;
+      animation: cinta 7s linear infinite;
     }
+
+    .marco {
+      position: relative;
+      animation: pop 0.75s cubic-bezier(0.2, 0.85, 0.2, 1.15) 0.15s both;
+    }
+
+    .estrella {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #f2c14e;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      animation: titilar 1.7s ease-in-out infinite;
+    }
+
+    .estrella:nth-child(1) { top: 6%; left: 4%; }
+    .estrella:nth-child(2) { top: 18%; right: 2%; animation-delay: -0.4s; background: #e07a8d; }
+    .estrella:nth-child(3) { top: 42%; left: 0; animation-delay: -0.9s; width: 7px; height: 7px; }
+    .estrella:nth-child(4) { bottom: 18%; right: 6%; animation-delay: -1.2s; background: #7eaa8a; }
+    .estrella:nth-child(5) { top: 2%; left: 46%; animation-delay: -0.6s; width: 8px; height: 8px; }
 
     .ilustracion {
       display: block;
@@ -170,6 +184,13 @@
       height: auto;
       margin: 0 auto;
       mix-blend-mode: multiply;
+      animation: flotar-suave 4.6s ease-in-out 1s infinite;
+    }
+
+    .mensaje,
+    .deseo,
+    .cierre {
+      animation: aparecer 0.7s ease both;
     }
 
     .mensaje {
@@ -185,6 +206,7 @@
       white-space: normal;
       overflow-wrap: break-word;
       max-width: 100%;
+      animation-delay: 0.45s;
     }
 
     .deseo {
@@ -200,6 +222,7 @@
       white-space: normal;
       max-width: 100%;
       color: var(--berry);
+      animation-delay: 0.75s;
     }
 
     .cierre {
@@ -208,6 +231,7 @@
       gap: 8px;
       margin-top: 20px;
       min-width: 0;
+      animation-delay: 1s;
     }
 
     .pollito {
@@ -216,7 +240,8 @@
       flex: none;
       margin-bottom: -8px;
       mix-blend-mode: multiply;
-      animation: saludo 3.2s ease-in-out infinite;
+      transform-origin: 50% 90%;
+      animation: saludo 2.6s ease-in-out 1.15s infinite;
     }
 
     .regalo {
@@ -233,23 +258,166 @@
       line-height: 1.4;
       text-align: center;
       text-wrap: pretty;
+      animation: latido 2.8s ease-in-out 1.6s infinite;
+    }
+
+    .envio {
+      margin-top: 18px;
+      animation: aparecer 0.7s ease 1.2s both;
+    }
+
+    .estado {
+      margin: 0 0 8px;
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 650;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--berry);
+    }
+
+    .puntos i {
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      margin-left: 3px;
+      border-radius: 50%;
+      background: currentColor;
+      vertical-align: middle;
+      animation: punto 1.2s ease-in-out infinite;
+    }
+
+    .puntos i:nth-child(2) { animation-delay: 0.15s; }
+    .puntos i:nth-child(3) { animation-delay: 0.3s; }
+
+    .pista {
+      position: relative;
+      height: 112px;
+      overflow: hidden;
+      border-radius: 18px;
+      background:
+        linear-gradient(#fff6ee, #fff6ee) center 78px / 100% 16px no-repeat,
+        #fffaf6;
+      border: 1.5px dashed var(--line);
+    }
+
+    .camino {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 26px;
+      height: 4px;
+      background: repeating-linear-gradient(90deg, #e0b08a 0 12px, transparent 12px 24px);
+      animation: avanzar 0.7s linear infinite;
+    }
+
+    .meta {
+      position: absolute;
+      right: 14px;
+      bottom: 30px;
+      width: 16px;
+      height: 16px;
+      background: #b8435a;
+      border: 2px solid #3a2924;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+    }
+
+    .viajero {
+      position: absolute;
+      bottom: 20px;
+      width: 78px;
+      height: 72px;
+      overflow: hidden;
+      animation: recorrer 7.5s linear infinite;
+    }
+
+    .repartidor {
+      width: 118px;
+      height: 118px;
+      margin: -24px 0 0 -20px;
+      object-fit: cover;
+      mix-blend-mode: multiply;
+      animation: brinco 0.42s ease-in-out infinite;
     }
 
     @keyframes subir {
-      from { opacity: 0; transform: translateY(16px) scale(0.985); }
+      from { opacity: 0; transform: translateY(28px) scale(0.94); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes pop {
+      0% { opacity: 0; transform: translateY(12px) scale(0.86); }
+      70% { opacity: 1; transform: translateY(-4px) scale(1.03); }
+      100% { opacity: 1; transform: none; }
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: none; }
     }
 
     @keyframes caer {
-      to { transform: translateY(110dvh) rotate(280deg); }
+      to { transform: translateY(110dvh) rotate(320deg); }
+    }
+
+    @keyframes estallar {
+      to { transform: translate(var(--x), var(--y)) rotate(var(--r)); opacity: 0; }
     }
 
     @keyframes saludo {
-      50% { transform: translateY(-7px) rotate(-3deg); }
+      0%, 100% { transform: translateY(0) rotate(0); }
+      18% { transform: translateY(-16px) rotate(-7deg); }
+      34% { transform: translateY(0) rotate(3deg) scale(1.05, 0.94); }
+      48% { transform: translateY(-8px) rotate(5deg); }
+      64% { transform: translateY(0) rotate(0); }
     }
 
     @keyframes flotar {
-      50% { transform: translateY(-10px); }
+      0%, 100% { transform: translateY(0) rotate(-4deg); }
+      50% { transform: translateY(-12px) rotate(5deg); }
+    }
+
+    @keyframes flotar-suave {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes titilar {
+      0%, 100% { opacity: 0.25; transform: scale(0.7) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.15) rotate(18deg); }
+    }
+
+    @keyframes cinta {
+      to { background-position: 68px 0; }
+    }
+
+    @keyframes deriva {
+      to { background-position: 80px 140px; }
+    }
+
+    @keyframes latido {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(242, 193, 78, 0); }
+      50% { box-shadow: 0 0 0 5px rgba(242, 193, 78, 0.28); }
+    }
+
+    @keyframes recorrer {
+      from { left: -90px; }
+      to { left: calc(100% - 64px); }
+    }
+
+    @keyframes brinco {
+      0%, 100% { transform: scaleX(-1) translateY(0); }
+      50% { transform: scaleX(-1) translateY(-5px); }
+    }
+
+    @keyframes avanzar {
+      to { background-position: -24px 0; }
+    }
+
+    @keyframes punto {
+      0%, 70%, 100% { opacity: 0.25; transform: translateY(0); }
+      35% { opacity: 1; transform: translateY(-3px); }
     }
 
     @media (max-width: 520px) {
@@ -258,39 +426,117 @@
       .cierre { flex-direction: column; align-items: center; }
       .pollito { width: 120px; margin-bottom: 0; }
       .regalo { width: 100%; }
-    }
-
-    @media (max-width: 759px) {
-      .globo { display: none; }
+      .g3 { right: 4px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .confetti { display: none; }
-      .tarjeta, .pollito, .globo { animation: none; }
+      .confetti, .estrella { display: none; }
+      .pattern,
+      .tarjeta,
+      .marco,
+      .ilustracion,
+      .mensaje,
+      .deseo,
+      .cierre,
+      .pollito,
+      .regalo,
+      .globo,
+      .cinta,
+      .envio,
+      .viajero,
+      .repartidor,
+      .camino,
+      .puntos i {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+
+      .viajero { left: 12px; }
+      .repartidor { transform: scaleX(-1); }
     }
   </style>
 </head>
 <body>
   <div class="pattern" aria-hidden="true"></div>
   <div class="wash" aria-hidden="true"></div>
-  <div class="globo g1" aria-hidden="true"></div>
-  <div class="globo g2" aria-hidden="true"></div>
-  <div class="confetti" aria-hidden="true">
-    <i></i><i></i><i></i><i></i><i></i><i></i>
-    <i></i><i></i><i></i><i></i><i></i><i></i>
-  </div>
+  <div class="confetti" aria-hidden="true"></div>
 
   <main>
     <article class="tarjeta">
+      <span class="globo g1" aria-hidden="true"></span>
+      <span class="globo g2" aria-hidden="true"></span>
+      <span class="globo g3" aria-hidden="true"></span>
       <div class="cinta" aria-hidden="true"></div>
-      <img class="ilustracion" src="assets/pastel.jpg" alt="Pastel con velas y las palabras feliz cumpleaños">
-      <p class="mensaje">Los postres no tardan 6 a 10 días hábiles en llegar, así que alcanzaron a llegar a tiempo para desearte un feliz cumpleaños.</p>
-      <p class="deseo">¡Que tengas un excelente día!</p>
+      <div class="marco">
+        <i class="estrella" aria-hidden="true"></i>
+        <i class="estrella" aria-hidden="true"></i>
+        <i class="estrella" aria-hidden="true"></i>
+        <i class="estrella" aria-hidden="true"></i>
+        <i class="estrella" aria-hidden="true"></i>
+        <img class="ilustracion" src="assets/pastel.png" alt="Pastel con velas y las palabras feliz cumpleaños">
+      </div>
+      <p class="mensaje">Los postres no tardan de 6 a 10 días hábiles en llegar, así que pudieron entregarse a tiempo para desearte un feliz cumpleaños.</p>
+      <p class="deseo">¡Que tengas un excelente día! 🎉</p>
       <div class="cierre">
-        <img class="pollito" src="assets/pollito.jpg" alt="Pollito con gorro de fiesta">
+        <img class="pollito" src="assets/pollito.png" alt="Pollito con gorro de fiesta">
         <p class="regalo">El regalo principal llega en unos días.</p>
       </div>
+      <section class="envio" aria-label="El paquete va en camino">
+        <p class="estado">En camino<span class="puntos" aria-hidden="true"><i></i><i></i><i></i></span></p>
+        <div class="pista">
+          <div class="camino" aria-hidden="true"></div>
+          <span class="meta" aria-hidden="true"></span>
+          <div class="viajero">
+            <img class="repartidor" src="assets/pollito-repartidor.jpg" alt="Pollito repartidor llevando un paquete">
+          </div>
+        </div>
+      </section>
     </article>
   </main>
+  <script>
+    (function () {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var capa = document.querySelector(".confetti");
+      var colores = ["#e07a8d", "#f2c14e", "#7eaa8a", "#fffaf6", "#c47a55", "#b8435a"];
+
+      function pieza(indice) {
+        var p = document.createElement("i");
+        p.style.background = colores[indice % colores.length];
+        if (indice % 3 === 0) {
+          p.style.width = "8px";
+          p.style.height = "8px";
+          p.style.borderRadius = "50%";
+        } else if (indice % 3 === 1) {
+          p.style.width = "7px";
+          p.style.height = "13px";
+          p.style.borderRadius = "2px";
+        } else {
+          p.style.width = "11px";
+          p.style.height = "6px";
+          p.style.borderRadius = "2px";
+        }
+        return p;
+      }
+
+      for (var i = 0; i < 30; i++) {
+        var copo = pieza(i);
+        copo.style.left = Math.random() * 100 + "%";
+        copo.style.animationDuration = (6 + Math.random() * 7) + "s";
+        copo.style.animationDelay = (-Math.random() * 10) + "s";
+        capa.appendChild(copo);
+      }
+
+      for (var j = 0; j < 22; j++) {
+        var estallido = pieza(j + 3);
+        estallido.className = "estallido";
+        estallido.style.setProperty("--x", (Math.random() * 280 - 140) + "px");
+        estallido.style.setProperty("--y", (Math.random() * 220 - 30) + "px");
+        estallido.style.setProperty("--r", (Math.random() * 360) + "deg");
+        estallido.style.animationDelay = (Math.random() * 0.2) + "s";
+        capa.appendChild(estallido);
+      }
+    })();
+  </script>
 </body>
 </html>
