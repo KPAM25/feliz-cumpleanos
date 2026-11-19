@@ -290,55 +290,24 @@
     .puntos i:nth-child(2) { animation-delay: 0.15s; }
     .puntos i:nth-child(3) { animation-delay: 0.3s; }
 
-    .pista {
-      position: relative;
-      height: 112px;
+    .mesa {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      height: 176px;
       overflow: hidden;
       border-radius: 18px;
-      background:
-        linear-gradient(#fff6ee, #fff6ee) center 78px / 100% 16px no-repeat,
-        #fffaf6;
+      background: #fff6ee;
       border: 1.5px dashed var(--line);
     }
 
-    .camino {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 26px;
-      height: 4px;
-      background: repeating-linear-gradient(90deg, #e0b08a 0 12px, transparent 12px 24px);
-      animation: avanzar 0.7s linear infinite;
-    }
-
-    .meta {
-      position: absolute;
-      right: 14px;
-      bottom: 30px;
-      width: 16px;
-      height: 16px;
-      background: #b8435a;
-      border: 2px solid #3a2924;
-      border-radius: 50% 50% 50% 0;
-      transform: rotate(-45deg);
-    }
-
-    .viajero {
-      position: absolute;
-      bottom: 20px;
-      width: 78px;
-      height: 72px;
-      overflow: hidden;
-      animation: recorrer 7.5s linear infinite;
-    }
-
-    .repartidor {
-      width: 118px;
-      height: 118px;
-      margin: -24px 0 0 -20px;
-      object-fit: cover;
+    .envolviendo {
+      width: 210px;
+      height: auto;
+      margin-bottom: -8px;
       mix-blend-mode: multiply;
-      animation: brinco 0.42s ease-in-out infinite;
+      transform-origin: 50% 80%;
+      animation: envolver 2.6s ease-in-out infinite;
     }
 
     @keyframes subir {
@@ -401,18 +370,9 @@
       50% { box-shadow: 0 0 0 5px rgba(242, 193, 78, 0.28); }
     }
 
-    @keyframes recorrer {
-      from { left: -90px; }
-      to { left: calc(100% - 64px); }
-    }
-
-    @keyframes brinco {
-      0%, 100% { transform: scaleX(-1) translateY(0); }
-      50% { transform: scaleX(-1) translateY(-5px); }
-    }
-
-    @keyframes avanzar {
-      to { background-position: -24px 0; }
+    @keyframes envolver {
+      0%, 100% { transform: rotate(-3deg) translateY(0); }
+      50% { transform: rotate(3deg) translateY(-5px); }
     }
 
     @keyframes punto {
@@ -443,17 +403,12 @@
       .globo,
       .cinta,
       .envio,
-      .viajero,
-      .repartidor,
-      .camino,
+      .envolviendo,
       .puntos i {
         animation: none;
         opacity: 1;
         transform: none;
       }
-
-      .viajero { left: 12px; }
-      .repartidor { transform: scaleX(-1); }
     }
   </style>
 </head>
@@ -480,16 +435,12 @@
       <p class="deseo">¡Que tengas un excelente día! 🎉</p>
       <div class="cierre">
         <img class="pollito" src="assets/pollito.png" alt="Pollito con gorro de fiesta">
-        <p class="regalo">El regalo principal llega en unos días.(se actualizará el estado pronto)</p>
+        <p class="regalo">El regalo ya está aquí. Falta envolverlo para entregárselo a la cumpleañera.</p>
       </div>
-      <section class="envio" aria-label="El paquete va en camino">
-        <p class="estado">En camino<span class="puntos" aria-hidden="true"><i></i><i></i><i></i></span></p>
-        <div class="pista">
-          <div class="camino" aria-hidden="true"></div>
-          <span class="meta" aria-hidden="true"></span>
-          <div class="viajero">
-            <img class="repartidor" src="assets/pollito-repartidor.jpg" alt="Pollito repartidor llevando un paquete">
-          </div>
+      <section class="envio" aria-label="El regalo falta envolver">
+        <p class="estado">Falta envolver</p>
+        <div class="mesa">
+          <img class="envolviendo" src="assets/pollito-envolviendo.jpg" alt="Pollito envolviendo el regalo con papel y listón">
         </div>
       </section>
     </article>
